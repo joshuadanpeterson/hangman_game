@@ -87,7 +87,7 @@ def play_hangman():
         elif set(guessed_letters) == set(word):
             elapsed_time = time.time() - start_time
             print(f"Congratulations! You've guessed the word: {word}")
-            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time)
+            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time, guessed_word)
             update_high_scores(player_name, score)
             break
 
