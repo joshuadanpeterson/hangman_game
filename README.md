@@ -15,28 +15,21 @@ The Hangman Game is a text-based game where players try to guess a word by guess
 ## Installation and Usage
 
 1. Clone the repository:
-
 ```shell
 git clone https://github.com/joshuadanpeterson/hangman_game.git
 ```
-
 2. Navigate to the project directory:
-
 ```shell
 cd hangman_game
 ```
-
 3. Run the game:
-
 ```shell
 python hangman_game.py
 ```
-
 4. Follow the on-screen instructions to play the Hangman Game
 
 ## Requirements
 - Python 3.x
-
 ## File Structure
 The project structure is as follows:
 
@@ -48,7 +41,6 @@ The project structure is as follows:
   - `hangman_menus.py`: Displays menus and handles user choices.
   - `hangman_display.py`: Provides visual representation of the hangman.
   - `hangman_data.py`: Stores data and messages used in the game.
-
 
 ## Acknowledgements
 - [Nucamp Coding Bootcamp](https://www.nucamp.co/)
