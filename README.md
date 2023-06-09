@@ -7,7 +7,7 @@ The Hangman Game is a text-based game where players try to guess a word by guess
 - Intuitive menu system for easy navigation and game options.
 - Word selection based on different themes and difficulty levels.
 - Letter guessing mechanism, ability to guess the entire word, and ask for a hint.
-- Scoring system based on word length, attempts, and time.
+- Scoring system based on word length and attempts.
 - High scores tracking and display to compete with other players.
 - Display of game rules and credits for better understanding.
 - Visual representation of hangman's progress throughout the game.
