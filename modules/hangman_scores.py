@@ -22,11 +22,10 @@ def get_high_scores():
     except IOError:
         print("No high scores found.")
 
-def calculate_score(player_name, word, max_attempts, incorrect_attempts, elapsed_time, guessed_word=None):
+def calculate_score(player_name, word, max_attempts, incorrect_attempts, word_guess=0):
     base_score = len(word) * 10
     attempt_penalty = (max_attempts - incorrect_attempts) * 5
-    time_penalty = int(elapsed_time)  # Penalty for each second over the time limit
 
-    word_bonus = len(guessed_word) * 20 if guessed_word is not None else 0
-    return max(base_score - attempt_penalty - time_penalty + word_bonus, 0)
+    word_bonus = len(word_guess) * 20 if word_guess is not None and isinstance(word_guess, str) else 0
+    return max(base_score - attempt_penalty + word_bonus, 0)
 

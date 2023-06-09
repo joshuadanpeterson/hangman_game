@@ -23,3 +23,7 @@ def choose_word(difficulty, theme):
 
 def display_word(word, guessed_letters):
     return ' '.join([letter if letter in guessed_letters else '_' for letter in word])
+
+def get_hint(word, guessed_letters):
+    remaining_letters = [letter for letter in word if letter not in guessed_letters]
+    return random.choice(remaining_letters)

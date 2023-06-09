@@ -3,7 +3,7 @@ import time
 from modules.data_structures import words
 from modules.hangman_data import difficulties, game_states, menu_options, menu_messages, high_scores, rules, credits, main_menu, game_menu, high_scores_menu, rules_menu, credits_menu, main_menu_menu
 from modules.hangman_display import display_hangman
-from modules.hangman_words import choose_word, display_word
+from modules.hangman_words import choose_word, display_word, get_hint
 from modules.hangman_scores import update_high_scores, get_high_scores, calculate_score
 from modules.hangman_menus import display_menu, get_menu_choice, display_credits, display_rules, quit
 
@@ -12,6 +12,7 @@ MAX_ATTEMPTS = 6
 MAX_LEVELS = 3
 MAX_LOSSES = 3
 TIME_PER_LETTER = 10
+MAX_HINTS = 2
 
 themes = list(words.keys())
 
@@ -44,8 +45,7 @@ def play_hangman():
 
     guessed_letters = []
     incorrect_attempts = 0
-
-    start_time = time.time()
+    hint_counter = 0
 
     while True:
         # Display hangman
@@ -53,22 +53,30 @@ def play_hangman():
         print(display_word(word, guessed_letters))
 
         # Get guess
-        guess = input("Guess a letter or enter 'guess' to guess the entire word: ").lower()
+        guess = input("Guess a letter, enter 'guess' to guess the entire word, enter 'hint' for a letter hint, or 'q' for Main Menu: ").lower()
         
         if guess == "guess":
             # Guess the entire word
             word_guess = input("Enter your word guess: ").lower()
             if word_guess == word:
-                elapsed_time = time.time() - start_time
+                # elapsed_time = time.time() - start_time
                 print(f"Congratulations! You've guessed the word: {word}")
-                score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time)
+                score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts)
                 update_high_scores(player_name, score)
                 break
             else:
                 incorrect_attempts += 1
                 print("Sorry, that's not the correct word.")
+        elif guess == "hint":
+            if hint_counter < MAX_HINTS:
+                hint_counter += 1
+                hint_letter = get_hint(word, guessed_letters)
+                print(f"Hint: The letter '{hint_letter}' is in the word.")
+            else:
+                print("You have used all the hints.")
+        elif guess == "q":
+            return # Return to main menu
         else:
-            # Check letter guess
             if guess in word:
                 guessed_letters.append(guess)
                 print(f"Good job! {guess} is in the word.")
@@ -78,16 +86,16 @@ def play_hangman():
 
         # Check if game is over
         if incorrect_attempts >= MAX_ATTEMPTS:
-            elapsed_time = time.time() - start_time
+            # elapsed_time = time.time() - start_time
             print("You've run out of attempts. Game over.")
             print(f"The word was: {word}")
-            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time)
+            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts)
             update_high_scores(player_name, score)
             break
         elif set(guessed_letters) == set(word):
-            elapsed_time = time.time() - start_time
+            # elapsed_time = time.time() - start_time
             print(f"Congratulations! You've guessed the word: {word}")
-            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time, guessed_word)
+            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time, word_guess)
             update_high_scores(player_name, score)
             break
 
