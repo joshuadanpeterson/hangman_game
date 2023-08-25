@@ -11,7 +11,6 @@ from modules.hangman_menus import display_menu, get_menu_choice, display_credits
 MAX_ATTEMPTS = 6
 MAX_LEVELS = 3
 MAX_LOSSES = 3
-TIME_PER_LETTER = 10
 MAX_HINTS = 2
 
 themes = list(words.keys())
@@ -95,7 +94,7 @@ def play_hangman():
         elif set(guessed_letters) == set(word):
             # elapsed_time = time.time() - start_time
             print(f"Congratulations! You've guessed the word: {word}")
-            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, elapsed_time, word_guess)
+            score = calculate_score(player_name, word, MAX_ATTEMPTS, incorrect_attempts, word_guess)
             update_high_scores(player_name, score)
             break
 
